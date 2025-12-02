@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TorneoModelos\TorneoModelos.csproj" />
+	 <PackageReference Include="newtonsoft.json" Version="13.0.3"/>
   </ItemGroup>
 
 </Project>
