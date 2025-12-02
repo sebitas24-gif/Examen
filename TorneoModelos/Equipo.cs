@@ -10,12 +10,18 @@ namespace TorneoModelos
 {
     public class Equipo
     {
-        
-        [Key]public int Id { get; set; }
+        [Key] 
+        public int Id { get; set; }
+
         public string? Nombre { get; set; }
         public string? Grupo { get; set; }
+
+        // FK
         public int TorneoId { get; set; }
-        public Torneo ? Torneo { get; set; }
+
+        // Navegación 
+        public Torneo? Torneo { get; set; }
+
         public List<Jugador>? Jugadores { get; set; }
     }
 }

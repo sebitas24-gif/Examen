@@ -9,11 +9,19 @@ namespace TorneoModelos
 {
     public class Jugador
     {
-        [Key] public int Id { get; set; }
-        public string NombreCompleto = string.Empty;
-        public int NumCamiseta { get; set; }
-        public int EquipoId { get; set; } 
+        [Key]
+        public int Id { get; set; }
 
+        // CORRECCIÓN: Agregado { get; set; } para que se guarde en la BD
+        public string NombreCompleto { get; set; } = string.Empty;
+
+        public int NumCamiseta { get; set; }
+
+        // Clave Foránea (FK)
+        public int EquipoId { get; set; }
+
+        //Navegacion 
+        public Equipo? Equipo { get; set; }
 
     } 
 }
