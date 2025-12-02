@@ -1,96 +1,138 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
-using TorneoModelos;
+using TorneoModelos; // Tus clases (Torneo, Equipo, Jugador, Partido, RegistroEstadistica)
+using Librerria.API.Consumer; // Tu librería Crud<T>
 
-namespace Torneos.ConsolaApp
+namespace Torneos.Consola
 {
-    class Program
+    internal class Program
     {
-        // ⚠️ ASEGÚRATE QUE TU API EN RENDER YA TENGA EL CÓDIGO NUEVO (HAZ PUSH PRIMERO)
-        static string baseUrl = "https://examen-0nrj.onrender.com";
+        // URL BASE DE LA API DESPLEGADA EN RENDER
+        static readonly string BaseUrl = "https://examen-0nrj.onrender.com/api/";
 
-        static HttpClient client = new HttpClient();
-
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-            client.BaseAddress = new Uri(baseUrl);
-            client.Timeout = TimeSpan.FromMinutes(2); // Darle tiempo a Render
-
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("==============================================");
-            Console.WriteLine("   PRUEBA DE GENERACIÓN AUTOMÁTICA DE PARTIDOS");
+            Console.WriteLine("   CLIENTE DE CONSOLA - SIMULACIÓN DE TORNEO  ");
             Console.WriteLine("==============================================");
             Console.ResetColor();
 
             try
             {
-                // 1. CREAR TORNEO
-                Console.WriteLine("\n1. Creando Torneo 'Liga Automática 2025'...");
-                var torneo = new Torneo { Nombre = "Liga Automática 2025", Tipo = "Liga", FechaInicio = DateTime.Now, FechaFin = DateTime.Now.AddMonths(1) };
-
-                var respTorneo = await client.PostAsJsonAsync("api/Torneos", torneo);
-                respTorneo.EnsureSuccessStatusCode();
-                var torneoDb = await respTorneo.Content.ReadFromJsonAsync<Torneo>();
-                Console.WriteLine($"✅ Torneo ID: {torneoDb!.Id}");
-
-                // 2. INSCRIBIR 4 EQUIPOS (Requisito mínimo)
-                Console.WriteLine("\n2. Inscribiendo 4 equipos...");
-                string[] nombresEquipos = { "Real Madrid", "Barcelona", "Bayern", "Liverpool" };
-
-                foreach (var nombre in nombresEquipos)
-                {
-                    var equipo = new Equipo { Nombre = nombre, Grupo = "X", TorneoId = torneoDb.Id };
-                    await client.PostAsJsonAsync("api/Equipos", equipo);
-                    Console.WriteLine($"   -> {nombre} inscrito.");
-                }
-
-                // 3. EL MOMENTO DE LA VERDAD: GENERAR CALENDARIO
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("\n3. ⚡ Solicitando a la API que genere el calendario...");
-                Console.ResetColor();
-
-                // Llamamos al nuevo endpoint que creaste
-                var respIniciar = await client.PostAsync($"api/Torneos/{torneoDb.Id}/iniciar", null);
-
-                if (respIniciar.IsSuccessStatusCode)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("✅ ¡ÉXITO! La API ha generado los partidos automáticamente.");
-                    Console.ResetColor();
-
-                    // 4. VER LOS PARTIDOS CREADOS
-                    Console.WriteLine("\n4. Consultando fixture generado...");
-                    var respPartidos = await client.GetAsync($"api/Torneos/{torneoDb.Id}");
-                    var torneoCompleto = await respPartidos.Content.ReadFromJsonAsync<Torneo>();
-
-                    Console.WriteLine("--------------------------------");
-                    foreach (var p in torneoCompleto!.Partidos!)
-                    {
-                        // Buscamos nombres (en una app real haríamos join, aquí simplificamos)
-                        Console.WriteLine($"📅 Partido {p.Id}: Equipo {p.EquipoLocalId} vs Equipo {p.EquipoVisitanteId} (Grupo {p.Grupo})");
-                    }
-                    Console.WriteLine("--------------------------------");
-                }
-                else
-                {
-                    string error = await respIniciar.Content.ReadAsStringAsync();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"❌ FALLÓ LA GENERACIÓN: {error}");
-                }
-
+                // Solo se llama al método principal
+                SimularFlujoCompleto();
             }
             catch (Exception ex)
             {
+                // El error 500 se capturará aquí
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"ERROR: {ex.Message}");
+                Console.WriteLine($"\n💀 ERROR CRÍTICO AL INICIAR EL FLUJO: {ex.Message}");
+                Console.WriteLine("Asegúrate que la API en Render esté encendida y la base de datos migrada.");
+                Console.ResetColor();
             }
 
-            Console.ResetColor();
-            Console.WriteLine("\nPresiona Enter para salir...");
+            Console.WriteLine("\n--- FIN DE LA SIMULACIÓN ---");
+            Console.WriteLine("Presiona Enter para cerrar...");
             Console.ReadLine();
+        }
+
+        private static void SimularFlujoCompleto()
+        {
+            // ==========================================
+            // 1. CREAR TORNEO (El Contenedor Principal)
+            // ==========================================
+            Console.WriteLine("\n1. Creando Torneo 'Copa Consola Final'...");
+            Crud<Torneo>.EndPoint = BaseUrl + "Torneos";
+
+            var torneoCreado = Crud<Torneo>.Create(new Torneo
+            {
+                Nombre = "Copa Consola Final",
+                Tipo = "Mixto",
+                FechaInicio = DateTime.Now.AddDays(7),
+                FechaFin = DateTime.Now.AddMonths(1)
+            });
+            Console.WriteLine($"✅ Torneo creado con ID: {torneoCreado.Id}");
+
+            // Si el objeto es nulo, lanzamos un error para detener el flujo
+            if (torneoCreado == null) throw new Exception("Error al crear Torneo.");
+
+
+            // ==========================================
+            // 2. INSCRIBIR EQUIPOS (Usan el ID del Torneo)
+            // ==========================================
+            Console.WriteLine("\n2. Inscribiendo Equipos (Leones vs Tigres)...");
+            Crud<Equipo>.EndPoint = BaseUrl + "Equipos";
+
+            // Equipo Local (Leones)
+            var leones = Crud<Equipo>.Create(new Equipo
+            {
+                Nombre = "Leones FC",
+                Grupo = "A",
+                TorneoId = torneoCreado.Id
+            });
+            Console.WriteLine($"   -> Leones FC inscrito (ID: {leones.Id})");
+
+            // Equipo Visitante (Tigres)
+            var tigres = Crud<Equipo>.Create(new Equipo
+            {
+                Nombre = "Tigres FC",
+                Grupo = "A",
+                TorneoId = torneoCreado.Id
+            });
+            Console.WriteLine($"   -> Tigres FC inscrito (ID: {tigres.Id})");
+
+
+            // ==========================================
+            // 3. REGISTRAR JUGADOR (Usa el ID del Equipo)
+            // ==========================================
+            Console.WriteLine("\n3. Registrando Jugador Estrella (Messi)...");
+            Crud<Jugador>.EndPoint = BaseUrl + "Jugadors"; // Nota: Usar el nombre de la ruta real
+
+            var messi = Crud<Jugador>.Create(new Jugador
+            {
+                NombreCompleto = "Lionel Messi",
+                NumCamiseta = 10,
+                EquipoId = leones.Id
+            });
+            Console.WriteLine($"✅ Jugador ID: {messi.Id} registrado.");
+
+
+            // ==========================================
+            // 4. CREAR PARTIDO (Usa IDs de Torneo y Equipos)
+            // ==========================================
+            Console.WriteLine("\n4. Programando Partido...");
+            Crud<Partido>.EndPoint = BaseUrl + "Partidos";
+
+            var partido = Crud<Partido>.Create(new Partido
+            {
+                Grupo = "Jornada 1",
+                FechaPartido = DateTime.Now.AddDays(8),
+                TorneoId = torneoCreado.Id,
+                EquipoLocalId = leones.Id,
+                EquipoVisitanteId = tigres.Id
+            });
+            Console.WriteLine($"✅ Partido Creado (ID: {partido.Id})");
+
+
+            // ==========================================
+            // 5. REGISTRAR ESTADÍSTICA (GOL)
+            // ==========================================
+            Console.WriteLine("\n5. Registrando Gol de Messi...");
+            Crud<RegistroEstadistica>.EndPoint = BaseUrl + "RegistroEstadisticas";
+
+            var gol = Crud<RegistroEstadistica>.Create(new RegistroEstadistica
+            {
+                TipoEstadistica = 1, // 1 = Gol
+                Cantidad = 1,
+                JugadorId = messi.Id,
+                PartidoId = partido.Id
+            });
+
+            Console.WriteLine($"✅ ¡FLUJO COMPLETO EXITOSO! Gol registrado.");
         }
     }
 }
