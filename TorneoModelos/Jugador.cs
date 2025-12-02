@@ -8,5 +8,5 @@ namespace TorneoModelos
 {
     public class Jugador
     {
-    }
+    } 
 }
