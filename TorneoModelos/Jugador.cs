@@ -12,15 +12,13 @@ namespace TorneoModelos
         [Key]
         public int Id { get; set; }
 
-        // CORRECCIÓN: Agregado { get; set; } para que se guarde en la BD
         public string NombreCompleto { get; set; } = string.Empty;
-
         public int NumCamiseta { get; set; }
 
-        // Clave Foránea (FK)
+        // RELACIÓN CON EQUIPO
         public int EquipoId { get; set; }
 
-        //Navegacion 
+        // [JsonIgnore]
         public Equipo? Equipo { get; set; }
 
     } 

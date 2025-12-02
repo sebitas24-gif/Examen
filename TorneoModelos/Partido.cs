@@ -10,19 +10,22 @@ namespace TorneoModelos
 {
     public class Partido
     {
-        [Key]
-        public int Id { get; set; }
+        [Key] public int Id { get; set; }
 
-        public string Grupo { get; set; } = string.Empty;
+        public string Grupo { get; set; } = string.Empty; // "Jornada 1", "Final"
+        public DateTime FechaPartido { get; set; } // DateTime es vital para ordenar
 
-        public int TorneoId {  get; set; } 
-
-        public DateTime FechaPartido { get; set; }
-
-        public int EquipoLocalId { get; set; }
-
-        //Navegacion
+        // RELACIÓN CON TORNEO (Saber a cuál pertenece)
+        public int TorneoId { get; set; }
         public Torneo? Torneo { get; set; }
+
+        // RELACIÓN CON EQUIPO (Local)
+        // Al llamarlo "EquipoLocalId", EF podría confundirse, así que aquí
+        // sí es mejor ser explícito con el nombre, pero mantenlo simple.
+        public int EquipoLocalId { get; set; }
         public Equipo? EquipoLocal { get; set; }
+
+        // Si quisieras agregar visitante en el futuro, solo copias lo de arriba
+        // y le pones EquipoVisitanteId / EquipoVisitante
     }
 }

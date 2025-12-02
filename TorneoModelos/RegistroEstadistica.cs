@@ -9,11 +9,23 @@ namespace TorneoModelos
 {
     public class RegistroEstadistica
     {
-        [Key] public int Id { get; set; }
+        [Key]
+        public int Id { get; set; }
+
+        // Ej: 1 = Gol, 2 = Amarilla, 3 = Roja
         public int TipoEstadistica { get; set; }
         public int Cantidad { get; set; }
-        public int JugadorId { get; set; }
-        public int PartidoId { get; set; }
 
+        // RELACIÓN CON JUGADOR
+        public int JugadorId { get; set; } // La llave (FK)
+        // Falta esto para que se conecte:
+        public Jugador? Jugador { get; set; }
+
+        // RELACIÓN CON PARTIDO
+        public int PartidoId { get; set; } // La llave (FK)
+        // Falta esto para que se conecte:
+        public Partido? Partido { get; set; }
     }
+
 }
+

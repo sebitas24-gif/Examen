@@ -10,18 +10,19 @@ namespace TorneoModelos
 {
     public class Equipo
     {
-        [Key] 
-        public int Id { get; set; }
+        [Key]  public int Id { get; set; }
 
-        public string? Nombre { get; set; }
-        public string? Grupo { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public string Grupo { get; set; } = string.Empty; 
 
-        // FK
+        // RELACIÓN CON TORNEO (FK Directa)
+        // EF detecta automáticamente que TorneoId es la llave de Torneo
         public int TorneoId { get; set; }
 
-        // Navegación 
+        // Navegación (para acceder a los datos del torneo desde el equipo)
         public Torneo? Torneo { get; set; }
 
+        // Lista de sus jugadores
         public List<Jugador>? Jugadores { get; set; }
     }
 }
