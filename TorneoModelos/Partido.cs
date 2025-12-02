@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace TorneoModelos
 {
-    public class Jugador
+    public class Partido
     {
         [Key] public int Id { get; set; }
-        public string NombreCompleto = string.Empty;
-        public int NumCamiseta { get; set; }
-        public int EquipoId { get; set; }
+
+        public string Grupo { get; set; } = string.Empty;
+        public DateTime FechaPartido { get; set; }
+        public int EquipoLocalId { get; set; }
 
 
-    } 
+    }
 }
