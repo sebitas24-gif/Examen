@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TorneoModelos
 {
-    class Torneo
+    public class Torneo
     {
         [Key] public int Id { get; set; }
         public string NombreTorneo { get; set; }
