@@ -1,3 +1,5 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Examen
 {
@@ -6,6 +8,8 @@ namespace Examen
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<ExamenContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ExamenContext") ?? throw new InvalidOperationException("Connection string 'ExamenContext' not found.")));
 
             // Add services to the container.
 
