@@ -17,6 +17,6 @@ namespace TorneoModelos
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public List<Equipo>? Equipos { get; set; }
-        public List<Partido>? Partidos { get; set; }
+        public List<Partido>? Partidos { get; set; } 
     }
 }
