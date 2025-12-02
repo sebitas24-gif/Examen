@@ -20,9 +20,9 @@ namespace TorneoModelos
         public int TorneoId { get; set; }
 
         // Navegación (para acceder a los datos del torneo desde el equipo)
-        public Torneo? Torneo { get; set; }
+        public ICollection<EquipoTorneo> TorneosInscritos { get; set; } = new List<EquipoTorneo>();
 
         // Lista de sus jugadores
-        public List<Jugador>? Jugadores { get; set; }
+        public ICollection<Jugador>? Jugadores { get; set; }
     }
 }

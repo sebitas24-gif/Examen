@@ -10,14 +10,13 @@ namespace TorneoModelos
 {
     public class EquipoTorneo
     {
-        [Key]
-        public int Id { get; set; }
-        //FK
         public int TorneoId { get; set; }
+
+        // Clave Foránea a Equipo (Parte de la PK compuesta)
         public int EquipoId { get; set; }
 
-        //Navegacion
-        public Torneo? Torneo { get; set; }
-        public Equipo? Equipo { get; set; }
+        // Navegacion
+        public Torneo Torneo { get; set; } = null!;
+        public Equipo Equipo { get; set; } = null!;
     }
 }
