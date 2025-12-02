@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TorneoModelos
 {
-    public class Jugador
+    public class Jugador 
     {
     } 
 }
