@@ -20,18 +20,18 @@ namespace Examen.Controllers
             _context = context;
         }
 
-        // GET: api/Partidos
+        // GET: api/Partidoss
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Partido>>> GetPartido()
         {
-            return await _context.Partido.ToListAsync();
+            return await _context.Partidoss.ToListAsync();
         }
 
-        // GET: api/Partidos/5
+        // GET: api/Partidoss/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Partido>> GetPartido(int id)
         {
-            var partido = await _context.Partido.FindAsync(id);
+            var partido = await _context.Partidoss.FindAsync(id);
 
             if (partido == null)
             {
@@ -41,7 +41,7 @@ namespace Examen.Controllers
             return partido;
         }
 
-        // PUT: api/Partidos/5
+        // PUT: api/Partidoss/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPartido(int id, Partido partido)
@@ -72,28 +72,28 @@ namespace Examen.Controllers
             return NoContent();
         }
 
-        // POST: api/Partidos
+        // POST: api/Partidoss
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Partido>> PostPartido(Partido partido)
         {
-            _context.Partido.Add(partido);
+            _context.Partidoss.Add(partido);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPartido", new { id = partido.Id }, partido);
         }
 
-        // DELETE: api/Partidos/5
+        // DELETE: api/Partidoss/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePartido(int id)
         {
-            var partido = await _context.Partido.FindAsync(id);
+            var partido = await _context.Partidoss.FindAsync(id);
             if (partido == null)
             {
                 return NotFound();
             }
 
-            _context.Partido.Remove(partido);
+            _context.Partidoss.Remove(partido);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +101,7 @@ namespace Examen.Controllers
 
         private bool PartidoExists(int id)
         {
-            return _context.Partido.Any(e => e.Id == id);
+            return _context.Partidoss.Any(e => e.Id == id);
         }
     }
 }

@@ -24,14 +24,14 @@ namespace Examen.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RegistroEstadistica>>> GetRegistroEstadistica()
         {
-            return await _context.RegistroEstadistica.ToListAsync();
+            return await _context.RegistroEstadisticas.ToListAsync();
         }
 
         // GET: api/RegistroEstadisticas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<RegistroEstadistica>> GetRegistroEstadistica(int id)
         {
-            var registroEstadistica = await _context.RegistroEstadistica.FindAsync(id);
+            var registroEstadistica = await _context.RegistroEstadisticas.FindAsync(id);
 
             if (registroEstadistica == null)
             {
@@ -77,7 +77,7 @@ namespace Examen.Controllers
         [HttpPost]
         public async Task<ActionResult<RegistroEstadistica>> PostRegistroEstadistica(RegistroEstadistica registroEstadistica)
         {
-            _context.RegistroEstadistica.Add(registroEstadistica);
+            _context.RegistroEstadisticas.Add(registroEstadistica);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetRegistroEstadistica", new { id = registroEstadistica.Id }, registroEstadistica);
@@ -87,13 +87,13 @@ namespace Examen.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRegistroEstadistica(int id)
         {
-            var registroEstadistica = await _context.RegistroEstadistica.FindAsync(id);
+            var registroEstadistica = await _context.RegistroEstadisticas.FindAsync(id);
             if (registroEstadistica == null)
             {
                 return NotFound();
             }
 
-            _context.RegistroEstadistica.Remove(registroEstadistica);
+            _context.RegistroEstadisticas.Remove(registroEstadistica);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +101,7 @@ namespace Examen.Controllers
 
         private bool RegistroEstadisticaExists(int id)
         {
-            return _context.RegistroEstadistica.Any(e => e.Id == id);
+            return _context.RegistroEstadisticas.Any(e => e.Id == id);
         }
     }
 }

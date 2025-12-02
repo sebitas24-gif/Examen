@@ -24,14 +24,14 @@ namespace Examen.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Torneo>>> GetTorneo()
         {
-            return await _context.Torneo.ToListAsync();
+            return await _context.Torneos.ToListAsync();
         }
 
         // GET: api/Torneos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Torneo>> GetTorneo(int id)
         {
-            var torneo = await _context.Torneo.FindAsync(id);
+            var torneo = await _context.Torneos.FindAsync(id);
 
             if (torneo == null)
             {
@@ -77,7 +77,7 @@ namespace Examen.Controllers
         [HttpPost]
         public async Task<ActionResult<Torneo>> PostTorneo(Torneo torneo)
         {
-            _context.Torneo.Add(torneo);
+            _context.Torneos.Add(torneo);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTorneo", new { id = torneo.Id }, torneo);
@@ -87,13 +87,13 @@ namespace Examen.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTorneo(int id)
         {
-            var torneo = await _context.Torneo.FindAsync(id);
+            var torneo = await _context.Torneos.FindAsync(id);
             if (torneo == null)
             {
                 return NotFound();
             }
 
-            _context.Torneo.Remove(torneo);
+            _context.Torneos.Remove(torneo);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +101,7 @@ namespace Examen.Controllers
 
         private bool TorneoExists(int id)
         {
-            return _context.Torneo.Any(e => e.Id == id);
+            return _context.Torneos.Any(e => e.Id == id);
         }
     }
 }

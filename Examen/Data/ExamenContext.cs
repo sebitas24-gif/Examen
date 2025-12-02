@@ -12,13 +12,13 @@ using TorneoModelos;
         {
         }
 
-        public DbSet<TorneoModelos.Equipo> Equipo { get; set; } = default!;
+        public DbSet<TorneoModelos.Equipo> Equipos { get; set; } = default!;
 
-public DbSet<TorneoModelos.Jugador> Jugador { get; set; } = default!;
+public DbSet<TorneoModelos.Jugador> Jugadors { get; set; } = default!;
 
-public DbSet<TorneoModelos.Partido> Partido { get; set; } = default!;
+public DbSet<TorneoModelos.Partido> Partidoss { get; set; } = default!;
 
-public DbSet<TorneoModelos.RegistroEstadistica> RegistroEstadistica { get; set; } = default!;
+public DbSet<TorneoModelos.RegistroEstadistica> RegistroEstadisticas { get; set; } = default!;
 
-public DbSet<TorneoModelos.Torneo> Torneo { get; set; } = default!;
+public DbSet<TorneoModelos.Torneo> Torneos { get; set; } = default!;
     }
