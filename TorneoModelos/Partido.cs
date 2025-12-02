@@ -14,11 +14,15 @@ namespace TorneoModelos
         public int Id { get; set; }
 
         public string Grupo { get; set; } = string.Empty;
+
+        public int TorneoId {  get; set; } 
+
         public DateTime FechaPartido { get; set; }
 
         public int EquipoLocalId { get; set; }
 
         //Navegacion
+        public Torneo? Torneo { get; set; }
         public Equipo? EquipoLocal { get; set; }
     }
 }

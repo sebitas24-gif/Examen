@@ -11,9 +11,7 @@ namespace TorneoModelos
     public class Torneo
     {
         [Key] public int Id { get; set; }
-        public string NombreTorneo { get; set; }
-        public string TipoTorneo { get; set; } // "Liga", "Copa", "Mixto" 
-
+        public string? NombreTorneo { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public List<Equipo>? Equipos { get; set; }
