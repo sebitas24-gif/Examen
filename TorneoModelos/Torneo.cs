@@ -17,10 +17,7 @@ namespace TorneoModelos
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
 
-        // Navegación M:M a Equipo a través de EquipoTorneo
-        public ICollection<EquipoTorneo> EquiposTorneos { get; set; } = new List<EquipoTorneo>();
-
-        // Navegación 1:N a Partido
-        public ICollection<Partido>? Partidos { get; set; }
+        public List<Equipo>? Equipos { get; set; }
+        public List<Partido>? Partidos { get; set; }
     }
 }

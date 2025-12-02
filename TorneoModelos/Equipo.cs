@@ -19,10 +19,7 @@ namespace TorneoModelos
         // EF detecta automáticamente que TorneoId es la llave de Torneo
         public int TorneoId { get; set; }
 
-        // Navegación (para acceder a los datos del torneo desde el equipo)
-        public ICollection<EquipoTorneo> TorneosInscritos { get; set; } = new List<EquipoTorneo>();
-
-        // Lista de sus jugadores
-        public ICollection<Jugador>? Jugadores { get; set; }
+        public Torneo? Torneo { get; set; }
+        public List<Jugador>? Jugadores { get; set; }
     }
 }

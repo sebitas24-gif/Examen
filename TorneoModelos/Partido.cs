@@ -22,8 +22,10 @@ namespace TorneoModelos
         // RELACIÓN CON EQUIPO (Local)
         public int EquipoLocalId { get; set; }
         public Equipo? EquipoLocal { get; set; }
+        public int EquipoVisitanteId { get; set; }
+        public Equipo? EquipoVisitante { get; set; }
 
         // Navegación 1:N a RegistroEstadistica
-        public ICollection<RegistroEstadistica>? Estadisticas { get; set; }
+        public List<RegistroEstadistica>? Estadisticas { get; set; }
     }
 }
