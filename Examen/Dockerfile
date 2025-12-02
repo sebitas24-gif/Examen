@@ -11,7 +11,7 @@ EXPOSE 8081
 # Esta fase se usa para compilar el proyecto de servicio
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
+WORKDIR /src 
 COPY ["Examen/Examen.csproj", "Examen/"]
 COPY ["TorneoModelos/TorneoModelos.csproj", "TorneoModelos/"]
 RUN dotnet restore "./Examen/Examen.csproj"
