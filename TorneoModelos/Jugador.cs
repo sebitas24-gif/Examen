@@ -12,7 +12,7 @@ namespace TorneoModelos
         [Key] public int Id { get; set; }
         public string NombreCompleto = string.Empty;
         public int NumCamiseta { get; set; }
-        public int EquipoId { get; set; }
+        public int EquipoId { get; set; } 
 
 
     } 

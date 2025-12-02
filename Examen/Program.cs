@@ -9,7 +9,7 @@ namespace Examen
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<ExamenContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("ExamenContext") ?? throw new InvalidOperationException("Connection string 'ExamenContext' not found.")));
+                options.UseNpgsql(builder.Configuration.GetConnectionString("ExamenContext") ?? throw new InvalidOperationException("Connection string 'ExamenContext' not found.")));
 
             // Add services to the container.
 
@@ -21,7 +21,7 @@ namespace Examen
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            //if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
