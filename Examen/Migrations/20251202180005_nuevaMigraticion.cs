@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Examen.Migrations
 {
     /// <inheritdoc />
-    public partial class v01 : Migration
+    public partial class nuevaMigraticion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "RegistroEstadistica",
+                name: "RegistroEstadisticas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -24,11 +24,11 @@ namespace Examen.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RegistroEstadistica", x => x.Id);
+                    table.PrimaryKey("PK_RegistroEstadisticas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Torneo",
+                name: "Torneos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -40,11 +40,11 @@ namespace Examen.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Torneo", x => x.Id);
+                    table.PrimaryKey("PK_Torneos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Equipo",
+                name: "Equipos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -55,17 +55,17 @@ namespace Examen.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Equipo", x => x.Id);
+                    table.PrimaryKey("PK_Equipos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Equipo_Torneo_TorneoId",
+                        name: "FK_Equipos_Torneos_TorneoId",
                         column: x => x.TorneoId,
-                        principalTable: "Torneo",
+                        principalTable: "Torneos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Partido",
+                name: "Partidoss",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -77,16 +77,16 @@ namespace Examen.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Partido", x => x.Id);
+                    table.PrimaryKey("PK_Partidoss", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Partido_Torneo_TorneoId",
+                        name: "FK_Partidoss_Torneos_TorneoId",
                         column: x => x.TorneoId,
-                        principalTable: "Torneo",
+                        principalTable: "Torneos",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Jugador",
+                name: "Jugadors",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -96,28 +96,28 @@ namespace Examen.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Jugador", x => x.Id);
+                    table.PrimaryKey("PK_Jugadors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Jugador_Equipo_EquipoId",
+                        name: "FK_Jugadors_Equipos_EquipoId",
                         column: x => x.EquipoId,
-                        principalTable: "Equipo",
+                        principalTable: "Equipos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Equipo_TorneoId",
-                table: "Equipo",
+                name: "IX_Equipos_TorneoId",
+                table: "Equipos",
                 column: "TorneoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Jugador_EquipoId",
-                table: "Jugador",
+                name: "IX_Jugadors_EquipoId",
+                table: "Jugadors",
                 column: "EquipoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Partido_TorneoId",
-                table: "Partido",
+                name: "IX_Partidoss_TorneoId",
+                table: "Partidoss",
                 column: "TorneoId");
         }
 
@@ -125,19 +125,19 @@ namespace Examen.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Jugador");
+                name: "Jugadors");
 
             migrationBuilder.DropTable(
-                name: "Partido");
+                name: "Partidoss");
 
             migrationBuilder.DropTable(
-                name: "RegistroEstadistica");
+                name: "RegistroEstadisticas");
 
             migrationBuilder.DropTable(
-                name: "Equipo");
+                name: "Equipos");
 
             migrationBuilder.DropTable(
-                name: "Torneo");
+                name: "Torneos");
         }
     }
 }

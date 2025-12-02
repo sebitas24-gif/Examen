@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Examen.Migrations
 {
     [DbContext(typeof(ExamenContext))]
-    [Migration("20251202174744_v01")]
-    partial class v01
+    [Migration("20251202180005_nuevaMigraticion")]
+    partial class nuevaMigraticion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,7 +45,7 @@ namespace Examen.Migrations
 
                     b.HasIndex("TorneoId");
 
-                    b.ToTable("Equipo");
+                    b.ToTable("Equipos");
                 });
 
             modelBuilder.Entity("TorneoModelos.Jugador", b =>
@@ -66,7 +66,7 @@ namespace Examen.Migrations
 
                     b.HasIndex("EquipoId");
 
-                    b.ToTable("Jugador");
+                    b.ToTable("Jugadors");
                 });
 
             modelBuilder.Entity("TorneoModelos.Partido", b =>
@@ -94,7 +94,7 @@ namespace Examen.Migrations
 
                     b.HasIndex("TorneoId");
 
-                    b.ToTable("Partido");
+                    b.ToTable("Partidoss");
                 });
 
             modelBuilder.Entity("TorneoModelos.RegistroEstadistica", b =>
@@ -119,7 +119,7 @@ namespace Examen.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RegistroEstadistica");
+                    b.ToTable("RegistroEstadisticas");
                 });
 
             modelBuilder.Entity("TorneoModelos.Torneo", b =>
@@ -146,7 +146,7 @@ namespace Examen.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Torneo");
+                    b.ToTable("Torneos");
                 });
 
             modelBuilder.Entity("TorneoModelos.Equipo", b =>

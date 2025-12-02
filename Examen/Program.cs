@@ -9,7 +9,7 @@ namespace Examen
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<ExamenContext>(options =>
-                options.UseNpgsql(builder.Configuration.GetConnectionString("ExamenContext") ?? throw new InvalidOperationException("Connection string 'ExamenContext' not found.")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ExamenContext") ?? throw new InvalidOperationException("Connection string 'ExamenContext' not found.")));
 
             // Add services to the container.
 
